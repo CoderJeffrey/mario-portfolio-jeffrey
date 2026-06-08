@@ -142,6 +142,48 @@
             75% { transform: translateX(5px); }
         }
 
+        /* Level Select Timeline Styles */
+        .timeline-container {
+            position: relative;
+            padding: 40px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            border: 4px dashed #000;
+            margin: 20px 0;
+        }
+        .timeline-node {
+            position: relative;
+            width: 80%;
+            margin: 40px 0;
+            z-index: 2;
+        }
+        .timeline-node:nth-child(odd) { align-self: flex-start; margin-left: 5%; }
+        .timeline-node:nth-child(even) { align-self: flex-end; margin-right: 5%; text-align: right; }
+        
+        .level-marker {
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            border: 4px solid #000;
+            position: absolute;
+            top: -20px;
+            box-shadow: 4px 4px 0 #000;
+        }
+        .timeline-node:nth-child(odd) .level-marker { left: -20px; }
+        .timeline-node:nth-child(even) .level-marker { right: -20px; }
+
+        .path-line {
+            position: absolute;
+            width: 4px;
+            background: repeating-linear-gradient(to bottom, #000, #000 10px, transparent 10px, transparent 20px);
+            z-index: 1;
+        }
+        /* S-Curve segments */
+        .curve-1 { top: 80px; left: 10%; width: 80%; height: 80px; border-top: 4px dashed #000; border-right: 4px dashed #000; border-top-right-radius: 40px; }
+        .curve-2 { top: 200px; right: 10%; width: 80%; height: 80px; border-top: 4px dashed #000; border-left: 4px dashed #000; border-top-left-radius: 40px; }
+
         .ground { 
             height: 60px; 
             background: linear-gradient(45deg, #704000 25%, transparent 25%), 
@@ -171,14 +213,35 @@
     </section>
 
     <section id="experience" onclick="playJump(); shakeScreen()">
-        <div class="brick-header">LEVELS CLEARED</div>
-        <div class="nes-container with-title content-box">
-            <p class="title">Experience</p>
-            <ul class="nes-list is-disc">
-                <li><span style="color: #4285F4">G</span><span style="color: #EA4335">o</span><span style="color: #FBBC05">o</span><span style="color: #4285F4">g</span><span style="color: #34A853">l</span><span style="color: #EA4335">e</span> - Software Engineer (Shopping on Gemini)</li>
-                <li>LinkedIn - Software Engineering Intern</li>
-                <li>Amazon - Software Development Engineer (SDE) Intern</li>
-            </ul>
+        <div class="brick-header">WORLD MAP</div>
+        <div class="timeline-container">
+            <div class="timeline-node">
+                <div class="level-marker"></div>
+                <div class="nes-container is-rounded content-box">
+                    <p class="title" style="font-size: 0.7rem; margin-top: -10px;"><span style="color: #4285F4">G</span><span style="color: #EA4335">o</span><span style="color: #FBBC05">o</span><span style="color: #4285F4">g</span><span style="color: #34A853">l</span><span style="color: #EA4335">e</span></p>
+                    <p style="font-size: 0.6rem;">Software Engineer<br>(Shopping on Gemini)</p>
+                </div>
+            </div>
+
+            <div class="curve-1"></div>
+
+            <div class="timeline-node">
+                <div class="level-marker"></div>
+                <div class="nes-container is-rounded content-box">
+                    <p class="title" style="font-size: 0.7rem; margin-top: -10px;">LinkedIn</p>
+                    <p style="font-size: 0.6rem;">Software Engineering Intern</p>
+                </div>
+            </div>
+
+            <div class="curve-2"></div>
+
+            <div class="timeline-node">
+                <div class="level-marker"></div>
+                <div class="nes-container is-rounded content-box">
+                    <p class="title" style="font-size: 0.7rem; margin-top: -10px;">Amazon</p>
+                    <p style="font-size: 0.6rem;">SDE Intern</p>
+                </div>
+            </div>
         </div>
     </section>
 
