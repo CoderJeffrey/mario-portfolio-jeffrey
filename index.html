@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retro Mario Portfolio - Jeff Liu</title>
+<link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+body { background-color: #5C94FC; font-family: "Press Start 2P", cursive; margin: 0; padding: 0; color: #212529; image-rendering: pixelated; }
+.game-container { max-width: 900px; margin: 0 auto; padding: 20px; background-color: #5C94FC; border: 4px solid #000; min-height: 100vh; position: relative; overflow-x: hidden; }
+header { display: flex; justify-content: space-between; align-items: center; padding: 20px; background: #000; color: #fff; border-bottom: 4px solid #fff; position: sticky; top: 0; z-index: 100; }
+.hud-item { text-align: center; }
+.hud-label { font-size: 0.8rem; margin-bottom: 5px; }
+.coin-icon { display: inline-block; width: 16px; height: 16px; background-color: #FFD700; border: 2px solid #000; margin-right: 5px; animation: spin 0.8s infinite steps(4); }
+@keyframes spin { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+section { margin: 40px 0; padding: 20px; }
+.brick-header { background-color: #C84C0C; border: 4px solid #000; padding: 10px; color: #fff; display: inline-block; margin-bottom: 20px; box-shadow: 4px 4px 0px #501000; position: relative; }
+.content-box { background-color: #fff; padding: 20px; }
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.project-card { background-color: #F8B800; border: 4px solid #000; padding: 20px; cursor: pointer; transition: transform 0.1s; position: relative; text-align: center; }
+.project-card:hover { transform: translateY(-5px); background-color: #FFA500; }
+.ground { height: 60px; background: linear-gradient(45deg, #704000 25%, transparent 25%), linear-gradient(-45deg, #704000 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #704000 75%), linear-gradient(-45deg, transparent 75%, #704000 75%); background-size: 40px 40px; background-color: #905000; border-top: 4px solid #000; }
+.bounce { animation: bounce 0.5s; }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+footer { text-align: center; padding: 20px; background: #000; color: #fff; }
+</style>
+</head>
+<body>
+<div class="game-container">
+<header>
+<div class="hud-item"><div class="hud-label">MARIO</div><div>JEFF LIU</div></div>
+<div class="hud-item" id="coin-hud"><div class="hud-label">COINS</div><div><span class="coin-icon"></span>x<span id="coin-count">00</span></div></div>
+<div class="hud-item"><div class="hud-label">WORLD</div><div>USC-GOOG</div></div>
+<div class="hud-item"><div class="hud-label">TIME</div><div>∞</div></div>
+</header>
+<section id="intro">
+<div class="brick-header">BIO / INTRO</div>
+<div class="nes-container is-rounded is-dark content-box">
+<p>Hello! I am Jeff Liu, a Software Engineer at Google working on Shopping on Gemini.</p>
+</div>
+</section>
+<section id="experience">
+<div class="brick-header">LEVELS CLEARED</div>
+<div class="nes-container with-title content-box">
+<p class="title">Experience</p>
+<ul class="nes-list is-disc">
+<li>Google - Software Engineer (Shopping on Gemini)</li>
+<li>LinkedIn - Software Engineering Intern</li>
+<li>Amazon - Software Development Engineer (SDE) Intern</li>
+</ul>
+</div>
+</section>
+<section id="projects">
+<div class="brick-header">SIDE QUESTS</div>
+<div class="projects-grid">
+<div class="project-card" onclick="addCoin(this)">
+<h3>FinX Leaderboard</h3>
+<p>Tracking financial influencers on X.</p>
+<a href="https://finx-leaderboard.com" class="nes-btn is-primary">View Quest</a>
+</div>
+<div class="project-card" onclick="addCoin(this)">
+<h3>USC Samba</h3>
+<p>ML Video Analysis for YouTube content.</p>
+</div>
+</div>
+</section>
+<section id="education">
+<div class="brick-header">STATS</div>
+<div class="nes-container is-rounded content-box">
+<p>University of Southern California (USC)</p>
+<p>BS in Computer Science, Minor in Data Analytics</p>
+</div>
+</section>
+<section id="contact">
+<div class="brick-header">WARP PIPE</div>
+<div class="nes-container with-title is-centered content-box">
+<p class="title">Connect</p>
+<a href="https://www.linkedin.com/in/jeff-jh-liu" class="nes-btn is-success">LinkedIn Profile</a>
+</div>
+</section>
+<div class="ground"></div>
+<footer><p>© 2026 JEFF LIU - LEVEL COMPLETE</p></footer>
+</div>
+<script>
+let coins = 0;
+function addCoin(element) {
+coins++;
+document.getElementById("coin-count").innerText = coins.toString().padStart(2, "0");
+element.classList.add("bounce");
+setTimeout(() => element.classList.remove("bounce"), 500);
+}
+</script>
+</body>
+</html>
