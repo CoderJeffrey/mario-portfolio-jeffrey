@@ -3,53 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super Jeff Liu World - Portfolio</title>
-    <!-- NES.css for the pixelated aesthetic -->
+    <title>Retro Mario Portfolio - Jeffrey Liu</title>
     <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
-    <!-- Press Start 2P font for that classic NES feel -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --mario-sky: #5C94FC;
-            --mario-brick: #C84C0C;
-            --mario-gold: #F8B800;
-            --mario-grass: #00A800;
-            --mario-ground: #905000;
-        }
-
         body {
-            background-color: var(--mario-sky);
+            background-color: #5C94FC;
             font-family: 'Press Start 2P', cursive;
             margin: 0;
             padding: 0;
             color: #212529;
             image-rendering: pixelated;
             overflow-x: hidden;
-            transition: transform 0.1s;
-        }
-
-        .screen-shake {
-            animation: shake 0.2s cubic-bezier(.36,.07,.19,.97) both;
-        }
-
-        @keyframes shake {
-            10%, 90% { transform: translate3d(-1px, 0, 0); }
-            20%, 80% { transform: translate3d(2px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-            40%, 60% { transform: translate3d(4px, 0, 0); }
         }
 
         .game-container {
             max-width: 900px;
             margin: 0 auto;
             padding: 20px;
-            background-color: var(--mario-sky);
+            background-color: #5C94FC;
             border: 4px solid #000;
             min-height: 100vh;
             position: relative;
         }
 
-        /* HUD Style */
         header {
             display: flex;
             justify-content: space-between;
@@ -60,17 +37,17 @@
             border-bottom: 4px solid #fff;
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
         }
 
         .hud-item { text-align: center; }
-        .hud-label { font-size: 0.7rem; margin-bottom: 5px; }
+        .hud-label { font-size: 0.8rem; margin-bottom: 5px; }
 
         .coin-icon {
             display: inline-block;
             width: 16px;
             height: 16px;
-            background-color: var(--mario-gold);
+            background-color: #FFD700;
             border: 2px solid #000;
             margin-right: 5px;
             animation: spin 0.8s infinite steps(4);
@@ -81,105 +58,20 @@
             to { transform: rotateY(360deg); }
         }
 
-        /* Sections */
-        section { margin: 40px 0; padding: 10px; }
+        section { margin: 40px 0; padding: 10px; cursor: pointer; transition: transform 0.1s; }
+        section:active { transform: scale(0.98); }
 
         .brick-header {
-            background-color: var(--mario-brick);
+            background-color: #C84C0C;
             border: 4px solid #000;
             padding: 10px;
             color: #fff;
             display: inline-block;
             margin-bottom: 20px;
             box-shadow: 4px 4px 0px #501000;
-            cursor: pointer;
         }
 
-        .content-box {
-            background-color: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        /* Floating Mystery Block */
-        .mystery-container {
-            position: fixed;
-            bottom: 100px;
-            right: 40px;
-            z-index: 999;
-        }
-
-        .mystery-block {
-            width: 60px;
-            height: 60px;
-            background-color: var(--mario-gold);
-            border: 4px solid #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2rem;
-            cursor: pointer;
-            box-shadow: 4px 4px 0px #a07000;
-            animation: float 2s infinite ease-in-out;
-            user-select: none;
-        }
-
-        .mystery-block.hit {
-            animation: bounce-block 0.2s ease-out;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        @keyframes bounce-block {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0); }
-        }
-
-        /* Achievements Overlay */
-        #achievement-pop {
-            position: fixed;
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2000;
-            pointer-events: none;
-            text-align: center;
-        }
-
-        .achievement-toast {
-            background: #000;
-            color: var(--mario-gold);
-            padding: 15px;
-            border: 4px solid #fff;
-            margin-bottom: 10px;
-            font-size: 0.8rem;
-            animation: slide-up 2s forwards;
-        }
-
-        @keyframes slide-up {
-            0% { opacity: 0; transform: translateY(20px); }
-            10% { opacity: 1; transform: translateY(0); }
-            80% { opacity: 1; }
-            100% { opacity: 0; transform: translateY(-50px); }
-        }
-
-        .ground {
-            height: 60px;
-            background-color: var(--mario-ground);
-            border-top: 4px solid #000;
-            background-image: 
-                linear-gradient(45deg, #704000 25%, transparent 25%),
-                linear-gradient(-45deg, #704000 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, #704000 75%),
-                linear-gradient(-45deg, transparent 75%, #704000 75%);
-            background-size: 40px 40px;
-        }
-
-        .nes-btn.is-success { margin-top: 10px; }
+        .content-box { background-color: #fff; padding: 20px; border: 4px solid #000; }
 
         .projects-grid {
             display: grid;
@@ -187,33 +79,108 @@
             gap: 20px;
         }
 
-        .card-retro {
+        .project-card {
+            background-color: #F8B800;
+            border: 4px solid #000;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Mystery Block */
+        .mystery-block {
+            position: fixed;
+            bottom: 80px;
+            right: 40px;
+            width: 60px;
+            height: 60px;
+            background-color: #F8B800;
+            border: 4px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 1000;
+            animation: float 2s infinite ease-in-out;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .bounce { animation: bounce 0.2s ease-out; }
+        @keyframes bounce {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2) translateY(-10px); }
+            100% { transform: scale(1); }
+        }
+
+        /* Achievement Popup */
+        #achievement-popup {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2000;
+            pointer-events: none;
+            text-align: center;
+            width: 80%;
+        }
+
+        .achievement-msg {
+            background: #fff;
             border: 4px solid #000;
             padding: 15px;
-            background: #eee;
-            transition: all 0.2s;
+            margin-bottom: 10px;
+            animation: slideUp 3s forwards;
+            font-size: 0.7rem;
+            line-height: 1.4;
         }
 
-        .card-retro:hover {
-            background: #fff;
-            transform: scale(1.02);
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            10% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-40px); }
         }
 
-        footer {
-            text-align: center;
-            padding: 30px;
-            background: #000;
-            color: #fff;
+        .screen-shake { animation: shake 0.2s; }
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            40% { transform: translate(3px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            80% { transform: translate(3px, 1px) rotate(1deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
         }
+
+        .ground {
+            height: 60px;
+            background: 
+                linear-gradient(45deg, #704000 25%, transparent 25%),
+                linear-gradient(-45deg, #704000 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #704000 75%),
+                linear-gradient(-45deg, transparent 75%, #704000 75%);
+            background-size: 40px 40px;
+            background-color: #905000;
+            border-top: 4px solid #000;
+        }
+
+        footer { text-align: center; padding: 20px; background: #000; color: #fff; }
     </style>
 </head>
-<body onclick="initAudio()">
+<body>
 
-    <div class="game-container">
+    <div id="achievement-popup"></div>
+
+    <div class="game-container" id="main-content">
         <header>
             <div class="hud-item">
                 <div class="hud-label">MARIO</div>
-                <div id="player-name">JEFF LIU</div>
+                <div id="player-name">JEFFREY LIU</div>
             </div>
             <div class="hud-item">
                 <div class="hud-label">COINS</div>
@@ -221,119 +188,84 @@
             </div>
             <div class="hud-item">
                 <div class="hud-label">WORLD</div>
-                <div>1-1</div>
+                <div>USC-GOOG</div>
             </div>
             <div class="hud-item">
                 <div class="hud-label">TIME</div>
-                <div id="game-time">∞</div>
+                <div>∞</div>
             </div>
         </header>
 
-        <!-- Bio -->
-        <section id="bio">
-            <div class="brick-header" onclick="playJump()">BIO</div>
+        <section id="intro" onclick="playJump()">
+            <div class="brick-header">BIO / INTRO</div>
             <div class="nes-container is-rounded is-dark content-box">
-                <p>Hello! I am Jeff Liu, a Software Engineer at <span style="color: #4285F4">G</span><span style="color: #EA4335">o</span><span style="color: #FBBC05">o</span><span style="color: #4285F4">g</span><span style="color: #34A853">l</span><span style="color: #EA4335">e</span> working on Shopping on Gemini.</p>
-                <p>University of Southern California (USC) Alum.</p>
+                <p>Hello! I am Jeffrey Liu, a Software Engineer at Google working on Shopping on Gemini.</p>
             </div>
         </section>
 
-        <!-- Experience -->
-        <section id="xp">
-            <div class="brick-header" onclick="playJump()">LEVELS CLEARED</div>
-            <div class="content-box nes-container with-title">
-                <p class="title">Career Progress</p>
-                <div class="nes-table-responsive">
-                    <table class="nes-table is-bordered is-centered">
-                        <thead>
-                            <tr>
-                                <th>Stage</th>
-                                <th>Role</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>GOOGLE</td>
-                                <td>Software Engineer</td>
-                            </tr>
-                            <tr>
-                                <td>LINKEDIN</td>
-                                <td>SWE Intern</td>
-                            </tr>
-                            <tr>
-                                <td>AMAZON</td>
-                                <td>SDE Intern</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+        <section id="experience" onclick="playJump()">
+            <div class="brick-header">LEVELS CLEARED</div>
+            <div class="nes-container with-title content-box">
+                <p class="title">Work History</p>
+                <ul class="nes-list is-disc">
+                    <li>Google - Software Engineer (Shopping on Gemini)</li>
+                    <li>LinkedIn - Software Engineering Intern</li>
+                    <li>Amazon - SDE Intern</li>
+                </ul>
             </div>
         </section>
 
-        <!-- Projects -->
-        <section id="projects">
-            <div class="brick-header" onclick="playJump()">SIDE QUESTS</div>
+        <section id="projects" onclick="playJump()">
+            <div class="brick-header">SIDE QUESTS</div>
             <div class="projects-grid">
-                <div class="card-retro">
-                    <h3 style="color: var(--mario-brick);">IndicatorHub</h3>
-                    <p style="font-size: 0.7rem;">Stock signals & daily ranked technical digests.</p>
-                    <a href="https://indicatorhub.dev" target="_blank" class="nes-btn is-primary" onclick="playPause()">Link</a>
+                <div class="project-card">
+                    <h3>FinX Leaderboard</h3>
+                    <p>Financial influencer rankings on X.</p>
+                    <a href="https://finx-leaderboard.com" target="_blank" class="nes-btn is-primary">View Quest</a>
                 </div>
-                <div class="card-retro">
-                    <h3 style="color: var(--mario-brick);">FinX Leaderboard</h3>
-                    <p style="font-size: 0.7rem;">Tracking financial influencers on X based on stock signals.</p>
-                    <a href="https://finx-leaderboard.com" target="_blank" class="nes-btn is-primary" onclick="playPause()">Link</a>
-                </div>
-                <div class="card-retro">
-                    <h3 style="color: var(--mario-brick);">USC Samba</h3>
-                    <p style="font-size: 0.7rem;">Research: Identifying inappropriate YouTube content using ML.</p>
+                <div class="project-card">
+                    <h3>IndicatorHub</h3>
+                    <p>Daily technical stock signal digests.</p>
+                    <a href="https://indicatorhub.dev" target="_blank" class="nes-btn is-success">View Quest</a>
                 </div>
             </div>
         </section>
 
-        <!-- Education -->
-        <section id="edu">
-            <div class="brick-header" onclick="playJump()">POWER-UPS</div>
+        <section id="stats" onclick="playJump()">
+            <div class="brick-header">STATS</div>
             <div class="nes-container is-rounded content-box">
-                <p><strong>USC (University of Southern California)</strong></p>
-                <p style="font-size: 0.8rem;">BS in Computer Science</p>
-                <p style="font-size: 0.8rem;">Minor in Data Analytics & Web Dev</p>
+                <p>University of Southern California (USC)</p>
+                <p>BS Computer Science | Minor Data Analytics</p>
+                <p>Research: USC Samba (ML Video Content Analysis)</p>
             </div>
         </section>
 
-        <!-- Contact -->
-        <section id="contact">
-            <div class="brick-header" onclick="playJump()">WARP PIPE</div>
+        <section id="contact" onclick="playJump()">
+            <div class="brick-header">WARP PIPE</div>
             <div class="nes-container with-title is-centered content-box">
                 <p class="title">Connect</p>
-                <a href="https://www.linkedin.com/in/jeff-jh-liu" target="_blank" class="nes-btn is-success" onclick="playPause()">LinkedIn</a>
+                <a href="https://www.linkedin.com/in/jeff-jh-liu" target="_blank" class="nes-btn is-warning">LinkedIn Profile</a>
             </div>
         </section>
+
+        <div class="mystery-block" id="q-block" onclick="hitBlock()">?</div>
 
         <div class="ground"></div>
         <footer>
-            <p>© 2026 JEFF LIU - LEVEL COMPLETE</p>
+            <p>© 2026 JEFFREY LIU - THANK YOU FOR PLAYING!</p>
         </footer>
     </div>
 
-    <!-- Mystery Block -->
-    <div class="mystery-container">
-        <div class="mystery-block" id="q-block" onclick="hitBlock()">?</div>
-    </div>
-
-    <div id="achievement-pop"></div>
-
     <script>
-        let audioCtx = null;
         let coins = 0;
-        const achievements = [
-            "ACHIEVEMENT UNLOCKED: Google Level Cleared!",
-            "ACHIEVEMENT UNLOCKED: IndicatorHub Wizard!",
-            "USC Samba Research Activated!",
-            "1-UP: LinkedIn Internship Found!",
-            "Amazon SDE Buff Collected!",
-            "USC Degree Power-up!",
-            "Gemini Shopping Optimized!"
+        let audioCtx = null;
+
+        const funFacts = [
+            "JEFFREY HAS A MINI BICHON DOGGO! 🐶",
+            "JEFFREY RAN A SOCIAL MEDIA ACCOUNT WITH OVER 4,000 FOLLOWERS! 📈",
+            "JEFFREY HAS TRAVELED TO MORE THAN 6 COUNTRIES! ✈️",
+            "JEFFREY LOVES BASKETBALL! 🏀",
+            "JEFFREY PLAYS TOPGOLF, THOUGH HIS SWING IS TRAGIC. 🏌️‍♂️"
         ];
 
         function initAudio() {
@@ -342,86 +274,61 @@
             }
         }
 
-        function playCoin() {
-            if (!audioCtx) return;
-            const now = audioCtx.currentTime;
+        function playCoinSound() {
+            initAudio();
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
-            
             osc.type = 'square';
-            osc.frequency.setValueAtTime(987.77, now); // B5
-            osc.frequency.setValueAtTime(1318.51, now + 0.1); // E6
-            
-            gain.gain.setValueAtTime(0.2, now);
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
-            
+            osc.frequency.setValueAtTime(987.77, audioCtx.currentTime); // B5
+            osc.frequency.setValueAtTime(1318.51, audioCtx.currentTime + 0.08); // E6
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
             osc.connect(gain);
             gain.connect(audioCtx.destination);
-            
             osc.start();
-            osc.stop(now + 0.5);
+            osc.stop(audioCtx.currentTime + 0.5);
         }
 
         function playJump() {
-            if (!audioCtx) return;
-            const now = audioCtx.currentTime;
+            initAudio();
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
-            
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(150, now);
-            osc.frequency.exponentialRampToValueAtTime(600, now + 0.2);
-            
-            gain.gain.setValueAtTime(0.2, now);
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.2);
-            
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            
-            osc.start();
-            osc.stop(now + 0.2);
-            
-            document.body.classList.remove('screen-shake');
-            void document.body.offsetWidth; // trigger reflow
-            document.body.classList.add('screen-shake');
-        }
-
-        function playPause() {
-            if (!audioCtx) return;
-            const now = audioCtx.currentTime;
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            
             osc.type = 'square';
-            osc.frequency.setValueAtTime(400, now);
-            osc.frequency.setValueAtTime(600, now + 0.1);
-            
-            gain.gain.setValueAtTime(0.1, now);
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.2);
-            
+            osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 0.2);
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.2);
             osc.connect(gain);
             gain.connect(audioCtx.destination);
-            
             osc.start();
-            osc.stop(now + 0.2);
+            osc.stop(audioCtx.currentTime + 0.2);
+            
+            // Screen shake
+            const el = document.getElementById('main-content');
+            el.classList.add('screen-shake');
+            setTimeout(() => el.classList.remove('screen-shake'), 200);
         }
 
         function hitBlock() {
-            initAudio();
-            playCoin();
-            
-            const block = document.getElementById('q-block');
-            block.classList.add('hit');
-            setTimeout(() => block.classList.remove('hit'), 200);
-
             coins++;
             document.getElementById('coin-count').innerText = coins.toString().padStart(2, '0');
+            playCoinSound();
+            
+            const block = document.getElementById('q-block');
+            block.classList.add('bounce');
+            setTimeout(() => block.classList.remove('bounce'), 200);
 
-            const toast = document.createElement('div');
-            toast.className = 'achievement-toast';
-            toast.innerText = achievements[Math.floor(Math.random() * achievements.length)];
-            document.getElementById('achievement-pop').appendChild(toast);
-            setTimeout(() => toast.remove(), 2000);
+            showAchievement();
+        }
+
+        function showAchievement() {
+            const container = document.getElementById('achievement-popup');
+            const msg = document.createElement('div');
+            msg.className = 'achievement-msg nes-container is-rounded';
+            const fact = funFacts[Math.floor(Math.random() * funFacts.length)];
+            msg.innerText = fact;
+            container.appendChild(msg);
+            setTimeout(() => msg.remove(), 3000);
         }
     </script>
 </body>
