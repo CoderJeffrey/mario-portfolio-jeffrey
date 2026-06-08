@@ -152,15 +152,14 @@
 <div class="game-container" id="main-container">
     <header>
         <div class="hud-item"><div class="hud-label">MARIO</div><div>JEFFREY LIU</div></div>
-        <div class="hud-item"><div class="hud-label">COINS</div><div><span class="coin-icon"></span>x<span id="coin-count">00</span></div></div>
-        <div class="hud-item"><div class="hud-label">WORLD</div><div>USC-GOOG</div></div>
+        <div class="hud-item"><div class="hud-label">WORLD</div><div>GOOG</div></div>
         <div class="hud-item"><div class="hud-label">TIME</div><div>∞</div></div>
     </header>
 
     <section id="intro" onclick="playJump(); shakeScreen()">
         <div class="brick-header">BIO / INTRO</div>
         <div class="nes-container is-rounded is-dark content-box">
-            <p>Hello! I am Jeffrey Liu, a Software Engineer at Google working on Shopping on Gemini.</p>
+            <p>Hello! I am Jeffrey Liu, a Software Engineer at <span style="color: #4285F4">G</span><span style="color: #EA4335">o</span><span style="color: #FBBC05">o</span><span style="color: #4285F4">g</span><span style="color: #34A853">l</span><span style="color: #EA4335">e</span> working on Shopping on Gemini.</p>
         </div>
     </section>
 
@@ -169,7 +168,7 @@
         <div class="nes-container with-title content-box">
             <p class="title">Experience</p>
             <ul class="nes-list is-disc">
-                <li>Google - Software Engineer (Shopping on Gemini)</li>
+                <li><span style="color: #4285F4">G</span><span style="color: #EA4335">o</span><span style="color: #FBBC05">o</span><span style="color: #4285F4">g</span><span style="color: #34A853">l</span><span style="color: #EA4335">e</span> - Software Engineer (Shopping on Gemini)</li>
                 <li>LinkedIn - Software Engineering Intern</li>
                 <li>Amazon - Software Development Engineer (SDE) Intern</li>
             </ul>
@@ -292,7 +291,10 @@
 
         // Increment HUD
         coins++;
-        document.getElementById('coin-count').innerText = coins.toString().padStart(2, '0');
+        const coinCountEl = document.getElementById('coin-count');
+        if (coinCountEl) {
+            coinCountEl.innerText = coins.toString().padStart(2, '0');
+        }
 
         // Floating Text Animation
         const rect = block.getBoundingClientRect();
