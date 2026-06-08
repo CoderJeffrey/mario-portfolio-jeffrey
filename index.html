@@ -7,90 +7,84 @@
     <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        body {
-            background-color: #5C94FC;
-            font-family: 'Press Start 2P', cursive;
-            margin: 0;
-            padding: 0;
-            color: #212529;
+        body { 
+            background-color: #5C94FC; 
+            font-family: "Press Start 2P", cursive; 
+            margin: 0; 
+            padding: 0; 
+            color: #212529; 
             image-rendering: pixelated;
             overflow-x: hidden;
         }
-
-        .game-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #5C94FC;
-            border: 4px solid #000;
-            min-height: 100vh;
-            position: relative;
+        .game-container { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            background-color: #5C94FC; 
+            border: 4px solid #000; 
+            min-height: 100vh; 
+            position: relative; 
         }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background: #000;
-            color: #fff;
-            border-bottom: 4px solid #fff;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 20px; 
+            background: #000; 
+            color: #fff; 
+            border-bottom: 4px solid #fff; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
         }
-
         .hud-item { text-align: center; }
         .hud-label { font-size: 0.8rem; margin-bottom: 5px; }
-
-        .coin-icon {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            background-color: #FFD700;
-            border: 2px solid #000;
-            margin-right: 5px;
-            animation: spin 0.8s infinite steps(4);
+        .coin-icon { 
+            display: inline-block; 
+            width: 16px; 
+            height: 16px; 
+            background-color: #FFD700; 
+            border: 2px solid #000; 
+            margin-right: 5px; 
+            animation: spin 0.8s infinite steps(4); 
         }
-
-        @keyframes spin {
-            from { transform: rotateY(0deg); }
-            to { transform: rotateY(360deg); }
+        @keyframes spin { 
+            from { transform: rotateY(0deg); } 
+            to { transform: rotateY(360deg); } 
         }
-
-        section { margin: 40px 0; padding: 10px; cursor: pointer; transition: transform 0.1s; }
+        section { 
+            margin: 40px 0; 
+            padding: 20px; 
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
         section:active { transform: scale(0.98); }
-
-        .brick-header {
-            background-color: #C84C0C;
-            border: 4px solid #000;
-            padding: 10px;
-            color: #fff;
-            display: inline-block;
-            margin-bottom: 20px;
-            box-shadow: 4px 4px 0px #501000;
+        .brick-header { 
+            background-color: #C84C0C; 
+            border: 4px solid #000; 
+            padding: 10px; 
+            color: #fff; 
+            display: inline-block; 
+            margin-bottom: 20px; 
+            box-shadow: 4px 4px 0px #501000; 
         }
-
-        .content-box { background-color: #fff; padding: 20px; border: 4px solid #000; }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+        .content-box { background-color: #fff; padding: 20px; }
+        .projects-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 20px; 
         }
-
-        .project-card {
-            background-color: #F8B800;
-            border: 4px solid #000;
-            padding: 20px;
+        .project-card { 
+            background-color: #F8B800; 
+            border: 4px solid #000; 
+            padding: 20px; 
             text-align: center;
-            position: relative;
         }
-
+        
         /* Mystery Block */
-        .mystery-block {
+        #mystery-block {
             position: fixed;
-            bottom: 80px;
+            bottom: 40px;
             right: 40px;
             width: 60px;
             height: 60px;
@@ -102,234 +96,215 @@
             font-size: 2rem;
             cursor: pointer;
             z-index: 1000;
+            box-shadow: 4px 4px 0px #000;
             animation: float 2s infinite ease-in-out;
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
         }
-
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
         }
-
-        .bounce { animation: bounce 0.2s ease-out; }
-        @keyframes bounce {
-            0% { transform: scale(1); }
+        .block-bounce { animation: block-bounce 0.2s ease !important; }
+        @keyframes block-bounce {
+            0%, 100% { transform: scale(1); }
             50% { transform: scale(1.2) translateY(-10px); }
-            100% { transform: scale(1); }
         }
 
-        /* Achievement Popup */
-        #achievement-popup {
+        /* 1-UP Animation */
+        .one-up-text {
             position: fixed;
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2000;
-            pointer-events: none;
-            text-align: center;
-            width: 80%;
-        }
-
-        .achievement-msg {
-            background: #fff;
-            border: 4px solid #000;
-            padding: 15px;
-            margin-bottom: 10px;
-            animation: slideUp 3s forwards;
+            color: #fff;
+            text-shadow: 2px 2px 0 #000;
             font-size: 0.7rem;
-            line-height: 1.4;
+            pointer-events: none;
+            z-index: 1001;
+            white-space: nowrap;
+            animation: one-up-float 2.5s forwards ease-out;
+            background: rgba(0,0,0,0.7);
+            padding: 5px 10px;
+            border: 2px solid #fff;
+        }
+        @keyframes one-up-float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-200px); opacity: 0; }
         }
 
-        @keyframes slideUp {
-            0% { opacity: 0; transform: translateY(20px); }
-            10% { opacity: 1; transform: translateY(0); }
-            80% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-40px); }
-        }
-
-        .screen-shake { animation: shake 0.2s; }
+        .screen-shake { animation: shake 0.2s ease-in-out; }
         @keyframes shake {
-            0% { transform: translate(1px, 1px) rotate(0deg); }
-            20% { transform: translate(-3px, 0px) rotate(1deg); }
-            40% { transform: translate(3px, 2px) rotate(-1deg); }
-            60% { transform: translate(-3px, 1px) rotate(0deg); }
-            80% { transform: translate(3px, 1px) rotate(1deg); }
-            100% { transform: translate(1px, -2px) rotate(-1deg); }
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
 
-        .ground {
-            height: 60px;
-            background: 
-                linear-gradient(45deg, #704000 25%, transparent 25%),
-                linear-gradient(-45deg, #704000 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, #704000 75%),
-                linear-gradient(-45deg, transparent 75%, #704000 75%);
-            background-size: 40px 40px;
-            background-color: #905000;
-            border-top: 4px solid #000;
+        .ground { 
+            height: 60px; 
+            background: linear-gradient(45deg, #704000 25%, transparent 25%), 
+                        linear-gradient(-45deg, #704000 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #704000 75%), 
+                        linear-gradient(-45deg, transparent 75%, #704000 75%); 
+            background-size: 40px 40px; 
+            background-color: #905000; 
+            border-top: 4px solid #000; 
         }
-
         footer { text-align: center; padding: 20px; background: #000; color: #fff; }
     </style>
 </head>
-<body>
+<body onclick="initAudio()">
+<div class="game-container" id="main-container">
+    <header>
+        <div class="hud-item"><div class="hud-label">MARIO</div><div>JEFFREY LIU</div></div>
+        <div class="hud-item"><div class="hud-label">COINS</div><div><span class="coin-icon"></span>x<span id="coin-count">00</span></div></div>
+        <div class="hud-item"><div class="hud-label">WORLD</div><div>USC-GOOG</div></div>
+        <div class="hud-item"><div class="hud-label">TIME</div><div>∞</div></div>
+    </header>
 
-    <div id="achievement-popup"></div>
+    <section id="intro" onclick="playJump(); shakeScreen()">
+        <div class="brick-header">BIO / INTRO</div>
+        <div class="nes-container is-rounded is-dark content-box">
+            <p>Hello! I am Jeffrey Liu, a Software Engineer at Google working on Shopping on Gemini.</p>
+        </div>
+    </section>
 
-    <div class="game-container" id="main-content">
-        <header>
-            <div class="hud-item">
-                <div class="hud-label">MARIO</div>
-                <div id="player-name">JEFFREY LIU</div>
+    <section id="experience" onclick="playJump(); shakeScreen()">
+        <div class="brick-header">LEVELS CLEARED</div>
+        <div class="nes-container with-title content-box">
+            <p class="title">Experience</p>
+            <ul class="nes-list is-disc">
+                <li>Google - Software Engineer (Shopping on Gemini)</li>
+                <li>LinkedIn - Software Engineering Intern</li>
+                <li>Amazon - Software Development Engineer (SDE) Intern</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="projects" onclick="playJump(); shakeScreen()">
+        <div class="brick-header">SIDE QUESTS</div>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>FinX Leaderboard</h3>
+                <p>Tracking financial influencers on X.</p>
+                <a href="https://finx-leaderboard.com" target="_blank" class="nes-btn is-primary">View Quest</a>
             </div>
-            <div class="hud-item">
-                <div class="hud-label">COINS</div>
-                <div><span class="coin-icon"></span>x<span id="coin-count">00</span></div>
+            <div class="project-card">
+                <h3>IndicatorHub</h3>
+                <p>Stock signals & daily technical digests.</p>
+                <a href="https://indicatorhub.dev" target="_blank" class="nes-btn is-success">View Quest</a>
             </div>
-            <div class="hud-item">
-                <div class="hud-label">WORLD</div>
-                <div>USC-GOOG</div>
-            </div>
-            <div class="hud-item">
-                <div class="hud-label">TIME</div>
-                <div>∞</div>
-            </div>
-        </header>
+        </div>
+    </section>
 
-        <section id="intro" onclick="playJump()">
-            <div class="brick-header">BIO / INTRO</div>
-            <div class="nes-container is-rounded is-dark content-box">
-                <p>Hello! I am Jeffrey Liu, a Software Engineer at Google working on Shopping on Gemini.</p>
-            </div>
-        </section>
+    <section id="education" onclick="playJump(); shakeScreen()">
+        <div class="brick-header">STATS</div>
+        <div class="nes-container is-rounded content-box">
+            <p>University of Southern California (USC)</p>
+            <p>BS in Computer Science, Minor in Data Analytics & Web Dev</p>
+            <p>Research: USC Samba (ML Video Analysis)</p>
+        </div>
+    </section>
 
-        <section id="experience" onclick="playJump()">
-            <div class="brick-header">LEVELS CLEARED</div>
-            <div class="nes-container with-title content-box">
-                <p class="title">Work History</p>
-                <ul class="nes-list is-disc">
-                    <li>Google - Software Engineer (Shopping on Gemini)</li>
-                    <li>LinkedIn - Software Engineering Intern</li>
-                    <li>Amazon - SDE Intern</li>
-                </ul>
-            </div>
-        </section>
+    <section id="contact" onclick="playJump(); shakeScreen()">
+        <div class="brick-header">WARP PIPE</div>
+        <div class="nes-container with-title is-centered content-box">
+            <p class="title">Connect</p>
+            <a href="https://www.linkedin.com/in/jeff-jh-liu" target="_blank" class="nes-btn is-primary">LinkedIn Profile</a>
+        </div>
+    </section>
 
-        <section id="projects" onclick="playJump()">
-            <div class="brick-header">SIDE QUESTS</div>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>FinX Leaderboard</h3>
-                    <p>Financial influencer rankings on X.</p>
-                    <a href="https://finx-leaderboard.com" target="_blank" class="nes-btn is-primary">View Quest</a>
-                </div>
-                <div class="project-card">
-                    <h3>IndicatorHub</h3>
-                    <p>Daily technical stock signal digests.</p>
-                    <a href="https://indicatorhub.dev" target="_blank" class="nes-btn is-success">View Quest</a>
-                </div>
-            </div>
-        </section>
+    <div id="mystery-block" onclick="triggerMystery(event)">?</div>
 
-        <section id="stats" onclick="playJump()">
-            <div class="brick-header">STATS</div>
-            <div class="nes-container is-rounded content-box">
-                <p>University of Southern California (USC)</p>
-                <p>BS Computer Science | Minor Data Analytics</p>
-                <p>Research: USC Samba (ML Video Content Analysis)</p>
-            </div>
-        </section>
+    <div class="ground"></div>
+    <footer><p>© 2026 JEFFREY LIU - LEVEL COMPLETE</p></footer>
+</div>
 
-        <section id="contact" onclick="playJump()">
-            <div class="brick-header">WARP PIPE</div>
-            <div class="nes-container with-title is-centered content-box">
-                <p class="title">Connect</p>
-                <a href="https://www.linkedin.com/in/jeff-jh-liu" target="_blank" class="nes-btn is-warning">LinkedIn Profile</a>
-            </div>
-        </section>
+<script>
+    let audioCtx = null;
+    let coins = 0;
+    const funFacts = [
+        "I HAVE A MINI BICHON DOGGO! 🐶",
+        "I RAN A SOCIAL MEDIA ACCOUNT WITH 4,000+ FOLLOWERS! 📈",
+        "I'VE TRAVELED TO MORE THAN 6 COUNTRIES! ✈️",
+        "I LOVE BASKETBALL! 🏀",
+        "I LOVE TOPGOLF, THOUGH HIS SWING IS TRAGIC. 🏌️‍♂️"
+    ];
 
-        <div class="mystery-block" id="q-block" onclick="hitBlock()">?</div>
-
-        <div class="ground"></div>
-        <footer>
-            <p>© 2026 JEFFREY LIU - THANK YOU FOR PLAYING!</p>
-        </footer>
-    </div>
-
-    <script>
-        let coins = 0;
-        let audioCtx = null;
-
-        const funFacts = [
-            "JEFFREY HAS A MINI BICHON DOGGO! 🐶",
-            "JEFFREY RAN A SOCIAL MEDIA ACCOUNT WITH OVER 4,000 FOLLOWERS! 📈",
-            "JEFFREY HAS TRAVELED TO MORE THAN 6 COUNTRIES! ✈️",
-            "JEFFREY LOVES BASKETBALL! 🏀",
-            "JEFFREY PLAYS TOPGOLF, THOUGH HIS SWING IS TRAGIC. 🏌️‍♂️"
-        ];
-
-        function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
+    function initAudio() {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         }
+    }
 
-        function playCoinSound() {
-            initAudio();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'square';
-            osc.frequency.setValueAtTime(987.77, audioCtx.currentTime); // B5
-            osc.frequency.setValueAtTime(1318.51, audioCtx.currentTime + 0.08); // E6
-            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.5);
-        }
+    function playNote(freq, type, start, duration, vol = 0.1) {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, start);
+        gain.gain.setValueAtTime(vol, start);
+        gain.gain.exponentialRampToValueAtTime(0.01, start + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(start);
+        osc.stop(start + duration);
+    }
 
-        function playJump() {
-            initAudio();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'square';
-            osc.frequency.setValueAtTime(150, audioCtx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 0.2);
-            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.2);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.2);
-            
-            // Screen shake
-            const el = document.getElementById('main-content');
-            el.classList.add('screen-shake');
-            setTimeout(() => el.classList.remove('screen-shake'), 200);
-        }
+    function playJump() {
+        if (!audioCtx) return;
+        const now = audioCtx.currentTime;
+        playNote(150, 'square', now, 0.2);
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.frequency.setValueAtTime(150, now);
+        osc.frequency.exponentialRampToValueAtTime(600, now + 0.2);
+        gain.gain.setValueAtTime(0.1, now);
+        gain.gain.linearRampToValueAtTime(0, now + 0.2);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(now + 0.2);
+    }
 
-        function hitBlock() {
-            coins++;
-            document.getElementById('coin-count').innerText = coins.toString().padStart(2, '0');
-            playCoinSound();
-            
-            const block = document.getElementById('q-block');
-            block.classList.add('bounce');
-            setTimeout(() => block.classList.remove('bounce'), 200);
+    function playOneUp() {
+        if (!audioCtx) return;
+        const now = audioCtx.currentTime;
+        // 1-UP sequence: E6, G6, E7, C7, D7, G7 (approx)
+        const notes = [1318.51, 1567.98, 2637.02, 2093.00, 2349.32, 3135.96];
+        notes.forEach((freq, i) => {
+            playNote(freq, 'square', now + (i * 0.08), 0.1, 0.05);
+        });
+    }
 
-            showAchievement();
-        }
+    function shakeScreen() {
+        const container = document.getElementById('main-container');
+        container.classList.add('screen-shake');
+        setTimeout(() => container.classList.remove('screen-shake'), 200);
+    }
 
-        function showAchievement() {
-            const container = document.getElementById('achievement-popup');
-            const msg = document.createElement('div');
-            msg.className = 'achievement-msg nes-container is-rounded';
-            const fact = funFacts[Math.floor(Math.random() * funFacts.length)];
-            msg.innerText = fact;
-            container.appendChild(msg);
-            setTimeout(() => msg.remove(), 3000);
-        }
-    </script>
+    function triggerMystery(e) {
+        e.stopPropagation();
+        initAudio();
+        
+        // Visual Bounce
+        const block = document.getElementById('mystery-block');
+        block.classList.remove('block-bounce');
+        void block.offsetWidth; // trigger reflow
+        block.classList.add('block-bounce');
+
+        // Sound
+        playOneUp();
+
+        // Increment HUD
+        coins++;
+        document.getElementById('coin-count').innerText = coins.toString().padStart(2, '0');
+
+        // Floating Text Animation
+        const rect = block.getBoundingClientRect();
+        const floatText = document.createElement('div');
+        floatText.className = 'one-up-text';
+        floatText.innerText = funFacts[Math.floor(Math.random() * funFacts.length)];
+        floatText.style.left = (rect.left - 50) + 'px';
+        floatText.style.top = (rect.top - 20) + 'px';
+        document.body.appendChild(floatText);
+
+        setTimeout(() => floatText.remove(), 2500);
+    }
+</script>
 </body>
 </html>
